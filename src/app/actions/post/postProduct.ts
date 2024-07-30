@@ -1,6 +1,7 @@
 'use server';
 
 import prisma from '@/app/lib/prismadb';
+import { ToastTypeUnion } from '@/app/components/Toast';
 
 const postProduct = async (formData: FormData) => {
   const { title, price } = {
@@ -11,12 +12,14 @@ const postProduct = async (formData: FormData) => {
   if (!price || !title)
     return {
       valid: false,
+      type: 'warning' as ToastTypeUnion,
       message: 'You must pass in title and price of the product!',
     };
 
   if (price < 0)
     return {
       valid: false,
+      type: 'warning' as ToastTypeUnion,
       message: 'Price must be positive intiger!',
     };
 
@@ -31,10 +34,15 @@ const postProduct = async (formData: FormData) => {
 
     return {
       valid: true,
+      type: 'success' as ToastTypeUnion,
       message: `Product ${title} was created or updated!`,
     };
   } catch (error) {
-    return { valid: false, message: 'Something went wrong!' };
+    return {
+      valid: false,
+      type: 'error' as ToastTypeUnion,
+      message: 'Something went wrong!',
+    };
   }
 };
 

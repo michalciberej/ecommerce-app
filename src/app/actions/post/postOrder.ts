@@ -3,23 +3,28 @@
 import { ToastTypeUnion } from '@/app/components/Toast';
 import prisma from '@/app/lib/prismadb';
 
-const deleteProduct = async (id: string) => {
-  if (!id)
+const postOrder = async (formData: FormData, id: string) => {
+  const quantity = Number(formData.get('quantity'));
+
+  if (!quantity || quantity < 0)
     return {
       valid: false,
       type: 'warning' as ToastTypeUnion,
-      message: 'You must pass in id of product!',
+      message: 'Quantity must be positive number!',
     };
 
   try {
-    await prisma.product.delete({
-      where: { id },
+    await prisma.order.create({
+      data: {
+        productId: id,
+        quantity,
+      },
     });
 
     return {
       valid: true,
       type: 'success' as ToastTypeUnion,
-      message: 'Product succesfully deleted!',
+      message: 'Order was succesfully created!',
     };
   } catch (error) {
     return {
@@ -30,4 +35,4 @@ const deleteProduct = async (id: string) => {
   }
 };
 
-export default deleteProduct;
+export default postOrder;
