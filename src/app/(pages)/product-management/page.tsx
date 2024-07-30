@@ -3,8 +3,9 @@ import getProducts from '@/app/actions/get/getProducts';
 import DeleteButton from '@/app/components/DeleteButton';
 import Pagination from '@/app/components/Pagination';
 import ProductForm from '@/app/components/ProductForm';
+import Error from '@/app/components/Error';
 
-const NUMBER_OF_PRODUCTS = 13;
+const NUMBER_OF_PRODUCTS_PER_PAGE = 12;
 
 const ProductManagementPage = async ({
   searchParams,
@@ -14,8 +15,8 @@ const ProductManagementPage = async ({
   const currentPage = Number(searchParams?.page || 1);
 
   const { valid, products, pagesCount, message } = await getProducts(
-    NUMBER_OF_PRODUCTS,
-    (currentPage - 1) * NUMBER_OF_PRODUCTS
+    NUMBER_OF_PRODUCTS_PER_PAGE,
+    NUMBER_OF_PRODUCTS_PER_PAGE * (currentPage - 1)
   );
 
   return (
@@ -23,7 +24,7 @@ const ProductManagementPage = async ({
       <section className='flex flex-col gap-4'>
         <h1 className='text-3xl'>Product Management</h1>
         <ProductForm />
-        {valid && (
+        {valid ? (
           <ul className='w-full bg-neutral-100 rounded-md shadow-md p-4 ring-1 ring-inset ring-neutral-500'>
             {products.length !== 0 ? (
               products.map(({ id, price, title }) => (
@@ -33,8 +34,8 @@ const ProductManagementPage = async ({
                   <div className='flex gap-8 w-full'>
                     <span className='flex capitalize flex-1'>{title}</span>
                     <div className='flex gap-2 flex-1'>
-                      <span className=''>{price}</span>
-                      <span className='text-neutral-500'>Kč</span>
+                      <span className='min-w-[4ch]'>{price}</span>
+                      <span>Kč</span>
                     </div>
                   </div>
                   <DeleteButton
@@ -47,6 +48,8 @@ const ProductManagementPage = async ({
               <li className='w-full text-center'>No Products</li>
             )}
           </ul>
+        ) : (
+          <Error message={message} />
         )}
         <Pagination pagesCount={pagesCount} />
       </section>
