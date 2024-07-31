@@ -86,19 +86,22 @@ const DeleteButton = ({ id, action }: DeleteButtonProps) => {
     <>
       <button
         type='button'
-        aria-label='Delete Product'
+        data-testid='delete-button'
+        aria-label='Delete product'
         onClick={handleOpen}
         className='hover:ring-1 focus:ring-1 transition-all ring-inset ring-neutral-500 p-1 rounded-md'>
         <XMarkIcon className='w-6 h-6' />
       </button>
       {isOpen && (
         <div
-          className={'absolute inset-0 z-10  flex items-center justify-center'}>
+          data-testid='conf-modal-container'
+          className={'fixed inset-0 z-10  flex items-center justify-center'}>
           <div
             className='bg-neutral-800/50 w-full h-full absolute'
             onClick={handleOpen}></div>
           <div
             ref={modalRef}
+            data-testid='conf-modal'
             className='flex flex-col gap-4 w-4/5 lg:w-1/3 bg-neutral-200 p-4 relative z-20 rounded-md shadow-md ring-1 ring-inset ring-neutral-500'>
             <h3 className='text-2xl'>Are you sure?</h3>
             <p className='flex-1'>
