@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 import './styles/globals.css';
 import Header from '@/app/components/Header';
-import { ToastContextProvider } from './context/ToastContext';
-import { ToastList } from './components/Toast';
+import { ToastContextProvider } from '@/app/context/ToastContext';
+import { ToastList } from '@/app/components/Toast';
 
 const roboto = Roboto({ subsets: ['latin'], weight: ['400'] });
 
@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${roboto.className} max-w-[1520px] w-full mx-auto bg-neutral-300 text-neutral-700 fill-neutral-700`}>
+        className={`${roboto.className} xl:max-w-[1520px] w-full mx-auto bg-neutral-300 text-neutral-700 fill-neutral-700`}>
         <ToastContextProvider>
           <Header />
           {children}
