@@ -17,7 +17,7 @@ const InfiniteScroll = ({ initialData, records }: InfiniteScrollProps) => {
   const [offset, setOffset] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [noDataLeft, setNoDataLeft] = useState(false);
-  const { ref, inView } = useInView<HTMLDivElement>();
+  const { ref, inView } = useInView<HTMLLIElement>();
 
   const handleFetch = async () => {
     const newData = await getProducts(records, records * offset);
@@ -27,7 +27,9 @@ const InfiniteScroll = ({ initialData, records }: InfiniteScrollProps) => {
 
   useEffect(() => {
     if (!inView) return;
-    if (!noDataLeft) setIsLoading(true);
+    if (noDataLeft) return;
+
+    setIsLoading(true);
 
     handleFetch()
       .then((res) => {
@@ -39,7 +41,7 @@ const InfiniteScroll = ({ initialData, records }: InfiniteScrollProps) => {
   }, [inView]);
 
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-12'>
+    <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-4 lg:gap-y-12'>
       {products.map((product) => (
         <ProductCard
           key={product.id}
@@ -47,13 +49,13 @@ const InfiniteScroll = ({ initialData, records }: InfiniteScrollProps) => {
         />
       ))}
       {!noDataLeft && (
-        <div
+        <li
           ref={ref}
           className='sm:col-span-2 md:col-span-3 lg:col-span-4 w-full flex justify-center'>
           {isLoading && <LoadingSpinner />}
-        </div>
+        </li>
       )}
-    </div>
+    </ul>
   );
 };
 
