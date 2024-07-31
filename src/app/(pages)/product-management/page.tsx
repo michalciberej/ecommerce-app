@@ -4,8 +4,9 @@ import DeleteButton from '@/app/components/DeleteButton';
 import Pagination from '@/app/components/Pagination';
 import ProductForm from '@/app/components/ProductForm';
 import Error from '@/app/components/Error';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 
-const NUMBER_OF_PRODUCTS_PER_PAGE = 12;
+const NUMBER_OF_PRODUCTS_PER_PAGE = 13;
 
 const ProductManagementPage = async ({
   searchParams,
@@ -25,29 +26,44 @@ const ProductManagementPage = async ({
         <h1 className='text-3xl'>Product Management</h1>
         <ProductForm />
         {valid ? (
-          <ul className='w-full bg-neutral-100 rounded-md shadow-md p-4 ring-1 ring-inset ring-neutral-500'>
-            {products.length !== 0 ? (
-              products.map(({ id, price, title }) => (
-                <li
-                  key={id}
-                  className='flex py-2 gap-20 [&:not(:last-child)]:border-b border-neutral-500 justify-between items-center'>
-                  <div className='flex gap-8 w-full'>
-                    <span className='flex capitalize flex-1'>{title}</span>
-                    <div className='flex gap-2 flex-1'>
+          <table className='w-full bg-neutral-100 rounded-md shadow-md p-4 ring-1 ring-neutral-500 overflow-hidden'>
+            <thead>
+              <tr className='flex justify-between items-center p-2 border-b border-neutral-500 bg-neutral-50'>
+                <th className='w-full text-start'>Title</th>
+                <th className='w-full text-start'>Price</th>
+                <th className='text-transparent'>
+                  <XMarkIcon className='w-6 h-6' />
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.length > 0 ? (
+                products.map(({ id, price, title }, index) => (
+                  <tr
+                    key={id}
+                    className={`flex p-1 [&:not(:last-child)]:border-b border-neutral-500 justify-between items-center ${
+                      index % 2 === 0 ? 'bg-orange-50/80' : 'bg-neutral-50'
+                    }`}>
+                    <td className='flex gap-8 w-full'>
+                      <span className='flex capitalize w-full'>{title}</span>
+                    </td>
+                    <td className='flex gap-2 w-full'>
                       <span className='min-w-[4ch]'>{price}</span>
                       <span>Kč</span>
-                    </div>
-                  </div>
-                  <DeleteButton
-                    id={id}
-                    action={deleteProduct}
-                  />
-                </li>
-              ))
-            ) : (
-              <li className='w-full text-center'>No Products</li>
-            )}
-          </ul>
+                    </td>
+                    <td>
+                      <DeleteButton
+                        id={id}
+                        action={deleteProduct}
+                      />
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <li className='w-full text-center'>No Products</li>
+              )}
+            </tbody>
+          </table>
         ) : (
           <Error message={message} />
         )}
