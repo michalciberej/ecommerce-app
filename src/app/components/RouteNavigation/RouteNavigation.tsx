@@ -6,7 +6,7 @@ const routes = getRoutes();
 const RouteNavigation = () => {
   return (
     <nav>
-      <ul className='flex items-center gap-6'>
+      <ul className='flex-col sm:flex-row flex items-center sm:gap-6'>
         {routes.map(({ id, url, label }) => (
           <li key={id}>
             <Link
