@@ -14,7 +14,7 @@ const ListOfOrdersPage = async ({
 }) => {
   const currentPage = Number(searchParams?.page || 1);
 
-  const { valid, orders, orderCount, message } = await getOrders(
+  const { valid, orders, pagesCount, message } = await getOrders(
     NUMBER_OF_ORDERS_PER_PAGE,
     NUMBER_OF_ORDERS_PER_PAGE * (currentPage - 1)
   );
@@ -26,41 +26,47 @@ const ListOfOrdersPage = async ({
         {valid ? (
           <ul className='w-full bg-neutral-100 rounded-md shadow-md p-4 ring-1 ring-inset ring-neutral-500'>
             <li className='w-full border-b border-neutral-500 py-2 justify-between flex items-center'>
-              <span className='min-w-56 w-full'>Order Id</span>
-              <span className='min-w-20 w-full'>Price of Product</span>
-              <span className='min-w-20 w-full'>Quantity of Product</span>
+              <span className='sm:min-w-56 w-full'>Order Id</span>
+              <span className='min-w-20 w-full'>Price</span>
+              <span className='min-w-20 w-full'>Quantity</span>
               <span className='min-w-20 w-full'>Total Price</span>
               <span className='p-1'>
                 <XMarkIcon className='w-6 h-6 text-transparent' />
               </span>
             </li>
-            {orders.map((order) => (
-              <li
-                key={order.id}
-                className='flex py-2 [&:not(:last-child)]:border-b border-neutral-500 justify-between items-center'>
-                <span className='min-w-56 w-full'>{order.id}</span>
-                <span className='min-w-20 w-full'>{order.product.price}</span>
-                <div className='min-w-20 w-full flex gap-1'>
-                  <span>{order.quantity}</span>
-                  <span>x</span>
-                </div>
-                <div className='min-w-20 w-full flex gap-1'>
-                  <span className='min-w-[4ch]'>
-                    {order.quantity * order.product.price}
+            {orders.length > 0 ? (
+              orders.map((order) => (
+                <li
+                  key={order.id}
+                  className='flex py-2 [&:not(:last-child)]:border-b border-neutral-500 justify-between items-center'>
+                  <span className='sm:min-w-56 w-full sm:max-w-[20ch] truncate'>
+                    {order.id}
                   </span>
-                  <span>Kč</span>
-                </div>
-                <DeleteButton
-                  id={order.id}
-                  action={deleteOrder}
-                />
-              </li>
-            ))}
+                  <span className='min-w-20 w-full'>{order.product.price}</span>
+                  <div className='min-w-20 w-full flex gap-1'>
+                    <span>{order.quantity}</span>
+                    <span>x</span>
+                  </div>
+                  <div className='min-w-20 w-full flex gap-1'>
+                    <span className='min-w-[4ch]'>
+                      {order.quantity * order.product.price}
+                    </span>
+                    <span>Kč</span>
+                  </div>
+                  <DeleteButton
+                    id={order.id}
+                    action={deleteOrder}
+                  />
+                </li>
+              ))
+            ) : (
+              <li className='w-full text-center py-6'>No orders yet</li>
+            )}
           </ul>
         ) : (
           <Error message={message} />
         )}
-        <Pagination pagesCount={orderCount} />
+        <Pagination pagesCount={pagesCount} />
       </section>
     </main>
   );
