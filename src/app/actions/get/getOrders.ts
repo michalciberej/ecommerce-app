@@ -17,7 +17,7 @@ const getOrders = async (take: number, skip: number) => {
       type: 'success',
       orders,
       message: '',
-      orderCount: Math.ceil(orderCount / take),
+      pagesCount: Math.ceil(orderCount / take),
     };
   } catch (error) {
     return {
@@ -25,7 +25,7 @@ const getOrders = async (take: number, skip: number) => {
       type: 'error',
       message: 'Something went wrong!',
       orders: [],
-      orderCount: 0,
+      pagesCount: 0,
     };
   }
 };

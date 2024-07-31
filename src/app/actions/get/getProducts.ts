@@ -6,13 +6,13 @@ import prisma from '@/app/lib/prismadb';
 const getProducts = async (take: number, skip: number) => {
   try {
     const products = await prisma.product.findMany({ take, skip });
-    const pagesCount = await prisma.product.count({});
+    const productCount = await prisma.product.count({});
 
     return {
       valid: true,
       products,
       type: 'success' as ToastTypeUnion,
-      pagesCount: Math.ceil(pagesCount / take),
+      pagesCount: Math.ceil(productCount / take),
       message: '',
     };
   } catch (error) {
