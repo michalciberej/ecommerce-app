@@ -13,11 +13,12 @@ const useInView = <T extends HTMLElement>() => {
 
   useEffect(() => {
     const observer = new IntersectionObserver(callback);
+    const element = ref.current;
 
-    if (ref.current) observer.observe(ref.current);
+    if (element) observer.observe(element);
 
     return () => {
-      if (ref.current) observer.unobserve(ref.current);
+      if (element) observer.unobserve(element);
     };
   }, [ref]);
 
