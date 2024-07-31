@@ -2,7 +2,7 @@ import { Product } from '@prisma/client';
 import Image from 'next/image';
 import Button from '@/app/components/Button';
 import postOrder from '@/app/actions/post/postOrder';
-import { useMemo, useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useToastContext } from '@/app/context/ToastContext';
 
 const COLORS = [
@@ -23,10 +23,11 @@ const ProductCard = ({ product }: { product: Product }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { addToast } = useToastContext();
 
+  // ! This causes server mismatch warning
+  // ? In real world app this would not happen.
+  // ? I am just trying to spice the placeholder image with some random color
+  // ? to make it more like a real ecommerce app and visualy pleasing
   const colorIndex = useMemo(() => Math.floor(Math.random() * 10), []);
-
-  // causes server mismatch
-  // add sizes to Image
 
   const handlePost = async (formData: FormData) => {
     setIsLoading(true);
@@ -43,7 +44,7 @@ const ProductCard = ({ product }: { product: Product }) => {
   };
 
   return (
-    <div className='p-2 ring-1 ring-inset ring-neutral-500 shadow-md rounded-md gap-y-4 flex flex-col bg-neutral-200'>
+    <li className='p-2 ring-1 ring-inset ring-neutral-500 shadow-md rounded-md gap-y-4 flex flex-col bg-neutral-200'>
       <div className='flex justify-between'>
         <span className='text-2xl capitalize'>{title}</span>
         <div className='flex gap-1 text-2xl'>
@@ -55,6 +56,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         <Image
           src={'/placeholder.jpg'}
           alt={`Image of ${title} product`}
+          sizes='(max-width: 640px) 100vw, (max-width: 768px)  50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, (max-width: 1536px) 20vw'
           fill
           priority
         />
@@ -84,7 +86,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           Buy
         </Button>
       </form>
-    </div>
+    </li>
   );
 };
 
