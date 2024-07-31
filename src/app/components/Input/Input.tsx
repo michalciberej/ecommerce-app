@@ -17,6 +17,7 @@ const Input = ({
   return (
     <label
       htmlFor={id}
+      data-testid='input-label'
       className={twMerge(
         'flex-1 flex gap-2 ring-1 ring-inset ring-neutral-500 rounded-md px-2 py-1 items-center',
         classNameLabel
