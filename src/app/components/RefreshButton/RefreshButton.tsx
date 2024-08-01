@@ -9,7 +9,7 @@ const RefreshButton = () => {
   return (
     <Button
       onClick={refresh}
-      className='bg-sky-400 text-white ring-sky-600 ring-2 hover:bg-sky-500 focus:bg-sky-500'>
+      className='bg-orange-400 text-white ring-orange-600 ring-2 hover:bg-orange-500 focus:bg-orange-500'>
       Refresh
     </Button>
   );
