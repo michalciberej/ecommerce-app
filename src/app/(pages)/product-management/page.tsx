@@ -60,7 +60,9 @@ const ProductManagementPage = async ({
                   </tr>
                 ))
               ) : (
-                <li className='w-full text-center'>No Products</li>
+                <tr>
+                  <td className='w-full text-center'>No Products</td>
+                </tr>
               )}
             </tbody>
           </table>
