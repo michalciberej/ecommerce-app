@@ -21,9 +21,9 @@ const Toast = ({ message, type, id }: ToastProps) => {
   return (
     <div
       role='alert'
-      className='w-full h-20 rounded-xl p-4 bg-white flex shadow-lg ring-1 ring-inset ring-neutral-400 relative z-[15] pointer-events-auto animate-toast opacity-0'>
+      className='w-full h-20 rounded-xl p-4 bg-white flex shadow-lg ring-1 ring-inset ring-neutral-400 relative z-[15] pointer-events-auto'>
       <div className='flex gap-8 items-center justify-between w-full text-wrap '>
-        <div>{toastIcon && toastIcon}</div>
+        {toastIcon}
         <p className='text-neutral-700 text-wrap'>{message}</p>
       </div>
       <button onClick={() => removeToast(id)}>
