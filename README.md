@@ -26,10 +26,24 @@ $ cd ecommerce-app
 $ npm install
 ```
 
-5. Run the development server.
+5. To connect to database add .env file to the root of the project with MongoDB url string.
+
+```js
+// .env
+DATABASE_URL = '<put MongoDB url string here>';
+```
+
+6. Generate prisma client and push schema models to sync the database.
+
+```bash
+$ npx prisma generate
+$ npx prisma db push
+```
+
+7. Run the development server.
 
 ```bash
 $ npm run dev
 ```
 
-Open localhost:3000 with browser to see the result.
+8. Open localhost:3000 with browser to see the result.
