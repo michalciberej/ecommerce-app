@@ -44,13 +44,8 @@ const ProductManagementPage = async ({
                     className={`flex p-1 [&:not(:last-child)]:border-b border-neutral-500 justify-between items-center ${
                       index % 2 === 0 ? 'bg-orange-50/80' : 'bg-neutral-50'
                     }`}>
-                    <td className='flex gap-8 w-full'>
-                      <span className='flex capitalize w-full'>{title}</span>
-                    </td>
-                    <td className='flex gap-2 w-full'>
-                      <span className='min-w-[4ch]'>{price}</span>
-                      <span>Kč</span>
-                    </td>
+                    <td className='w-full capitalize'>{title}</td>
+                    <td className='flex gap-2 w-full'>{price} Kč</td>
                     <td>
                       <DeleteButton
                         id={id}
