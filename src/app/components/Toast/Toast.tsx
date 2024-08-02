@@ -22,7 +22,7 @@ const Toast = ({ message, type, id }: ToastProps) => {
     <div
       role='alert'
       className='w-full h-20 rounded-xl p-4 bg-white flex shadow-lg ring-1 ring-inset ring-neutral-400 relative z-[15] pointer-events-auto'>
-      <div className='flex gap-8 items-center justify-between w-full text-wrap '>
+      <div className='flex gap-4 items-center justify-between w-full text-wrap '>
         {toastIcon}
         <p className='text-neutral-700 text-wrap'>{message}</p>
       </div>
