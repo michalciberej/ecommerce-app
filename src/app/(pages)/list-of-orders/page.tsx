@@ -30,7 +30,8 @@ const ListOfOrdersPage = async ({
                 <th className='text-start sm:max-w-56 sm:min-w-[20ch] w-full gap-1 sm:gap-8'>
                   Order Id
                 </th>
-                <th className='text-start w-full'>Price</th>
+                <th className='text-start w-full'>Number</th>
+                <th className='text-start w-full'>Title</th>
                 <th className='text-start w-full'>Quantity</th>
                 <th className='text-start w-full'>Total Price</th>
                 <th className='p-1'>
@@ -49,17 +50,11 @@ const ListOfOrdersPage = async ({
                     <td className='sm:max-w-56 w-full sm:min-w-[20ch] truncate'>
                       {order.id}
                     </td>
-                    <td className='w-full flex gap-1'>
-                      <span>{order.product.price}</span>
-                      <span>Kč</span>
-                    </td>
-                    <td className='w-full flex gap-1'>
-                      <span>{order.quantity}</span>
-                      <span>x</span>
-                    </td>
-                    <td className='w-full flex gap-1'>
-                      <span>{order.quantity * order.product.price}</span>
-                      <span>Kč</span>
+                    <td className='w-full'>{index + 1}</td>
+                    <td className='w-full capitalize'>{order.product.title}</td>
+                    <td className='w-full'>{order.quantity} x</td>
+                    <td className='w-full '>
+                      {order.quantity * order.product.price} Kč
                     </td>
                     <td>
                       <DeleteButton
