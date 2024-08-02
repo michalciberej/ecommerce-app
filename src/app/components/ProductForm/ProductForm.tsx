@@ -40,6 +40,7 @@ const ProductForm = () => {
         name='title'
         label='Title:'
         type='text'
+        minLength={1}
         disabled={isLoading}
       />
       <Input
