@@ -37,7 +37,7 @@ const Pagination = ({ pagesCount }: { pagesCount: number }) => {
         <li>
           <button
             type='button'
-            aria-label={`Change to first page`}
+            aria-label='Change to first page'
             onClick={() => replace(createPageURL(1, searchParams, pathname))}
             className='rounded-md p-2 ring-1 ring-inset ring-neutral-500 bg-neutral-50 flex '>
             <ChevronDoubleLeftIcon className='w-4 h-4' />
@@ -60,7 +60,7 @@ const Pagination = ({ pagesCount }: { pagesCount: number }) => {
         <li>
           <button
             type='button'
-            aria-label={`Change to last page`}
+            aria-label='Change to last page'
             onClick={() =>
               replace(createPageURL(pagesCount, searchParams, pathname))
             }
