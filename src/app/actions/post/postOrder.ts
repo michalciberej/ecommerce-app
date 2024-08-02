@@ -6,7 +6,7 @@ import prisma from '@/app/lib/prismadb';
 const postOrder = async (formData: FormData, id: string) => {
   const quantity = Number(formData.get('quantity'));
 
-  if (!quantity || quantity < 0)
+  if (!quantity || quantity < 1)
     return {
       valid: false,
       type: 'warning' as ToastTypeUnion,
