@@ -4,6 +4,7 @@ import Button from '@/app/components/Button';
 import postOrder from '@/app/actions/post/postOrder';
 import { useState, useMemo } from 'react';
 import { useToastContext } from '@/app/context/ToastContext';
+import QuantityInput from '@/app/components/QuantityInput';
 
 const COLORS = [
   '#5D9B9B',
@@ -44,48 +45,39 @@ const ProductCard = ({ product }: { product: Product }) => {
   };
 
   return (
-    <li className='p-2 ring-1 ring-inset ring-neutral-500 shadow-md rounded-md gap-y-4 flex flex-col bg-neutral-200'>
-      <div className='flex justify-between'>
-        <span className='text-2xl capitalize'>{title}</span>
-        <div className='flex gap-1 text-2xl'>
-          <span>{price}</span>
-          <span>Kč</span>
-        </div>
-      </div>
-      <div className='relative overflow-hidden rounded-md w-full max-w-[700px] aspect-video'>
-        <Image
-          src={'/placeholder.jpg'}
-          alt={`Image of ${title} product`}
-          sizes='(max-width: 640px) 100vw, (max-width: 768px)  50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, (max-width: 1536px) 20vw'
-          fill
-          priority
-        />
+    <li className='p-2 ring-1 ring-inset ring-neutral-500 shadow-md rounded-md bg-neutral-200'>
+      <article className='gap-y-4 flex flex-col max-w-content w-full'>
+        <h2 className='text-2xl capitalize'>{title}</h2>
 
-        <div
-          className='w-full h-full opacity-50 absolute inset-0 z-10'
-          style={{ backgroundColor: COLORS[colorIndex] }}></div>
-      </div>
-      <form
-        action={handlePost}
-        className='flex justify-between items-center'>
-        <label
-          htmlFor={title + id}
-          className='sr-only'>
-          Quantity
-        </label>
-        <input
-          type='number'
-          name='quantity'
-          id={title + id}
-          min={1}
-          className='bg-transparent ring-1 ring-inset ring-neutral-500 rounded-md flex w-16 p-2 text-center'
-        />
-        <Button
-          className='p-2'
-          isLoading={isLoading}>
-          Buy
-        </Button>
-      </form>
+        <div className='relative overflow-hidden rounded-md w-full max-w-[700px] aspect-video'>
+          <Image
+            src={'/placeholder.jpg'}
+            alt={`Image of ${title} product`}
+            sizes='(max-width: 640px) 100vw, (max-width: 768px)  50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, (max-width: 1536px) 20vw'
+            fill
+            priority
+          />
+          <div
+            className='w-full h-full opacity-50 absolute inset-0 z-10'
+            style={{ backgroundColor: COLORS[colorIndex] }}></div>
+        </div>
+
+        <div className='flex justify-between items-center'>
+          <p className='flex gap-1 text-xl'>
+            <data>{price}</data> Kč
+          </p>
+          <form
+            action={handlePost}
+            className='flex gap-4 items-center'>
+            <QuantityInput id={title + id} />
+            <Button
+              className='p-2'
+              isLoading={isLoading}>
+              Buy
+            </Button>
+          </form>
+        </div>
+      </article>
     </li>
   );
 };
