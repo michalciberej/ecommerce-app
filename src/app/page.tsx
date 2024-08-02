@@ -10,8 +10,9 @@ const HomePage = async () => {
 
   return (
     <>
-      <main>
-        <section className='py-8 px-2'>
+      <main className='py-4 px-2'>
+        <section className='flex flex-col gap-4 px-2 pb-4'>
+          <h1 className='text-3xl'>Products</h1>
           {valid ? (
             <InfiniteScroll
               initialData={products}
