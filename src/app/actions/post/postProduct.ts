@@ -5,7 +5,7 @@ import { ToastTypeUnion } from '@/app/components/Toast';
 
 const postProduct = async (formData: FormData) => {
   const { title, price } = {
-    title: String(formData.get('title')),
+    title: String(formData.get('title')).trim(),
     price: Number(formData.get('price')),
   };
 
