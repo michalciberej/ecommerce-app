@@ -11,7 +11,7 @@ const RouteNavigation = () => {
           <li key={id}>
             <Link
               href={url}
-              className='font-bold tracking-wide'>
+              className='font-bold tracking-wide after:content-[""] after:w-0 after:h-[1px] after:bg-neutral-800 after:block after: after:origin-left after:transition-all hover:after:w-full'>
               {label}
             </Link>
           </li>
