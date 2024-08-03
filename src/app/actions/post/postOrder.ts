@@ -14,10 +14,15 @@ const postOrder = async (formData: FormData, id: string) => {
     };
 
   try {
+    const order = await prisma.order.findFirst({
+      orderBy: { orderNumber: 'desc' },
+    });
+
     await prisma.order.create({
       data: {
         productId: id,
         quantity,
+        orderNumber: order?.orderNumber! + 1 || 1,
       },
     });
 
