@@ -5,6 +5,7 @@ import postOrder from '@/app/actions/post/postOrder';
 import { useState, useMemo } from 'react';
 import { useToastContext } from '@/app/context/ToastContext';
 import QuantityInput from '@/app/components/QuantityInput';
+import { useRouter } from 'next/navigation';
 
 const COLORS = [
   '#5D9B9B',
@@ -23,6 +24,7 @@ const ProductCard = ({ product }: { product: Product }) => {
   const { id, price, title } = product;
   const [isLoading, setIsLoading] = useState(false);
   const { addToast } = useToastContext();
+  const { refresh } = useRouter();
 
   // ! This causes server mismatch warning
   // ? In real world app this would not happen.
@@ -37,6 +39,7 @@ const ProductCard = ({ product }: { product: Product }) => {
       .then((res) => {
         if (res.valid) {
           addToast(res.message, res.type);
+          refresh();
         } else {
           addToast(res.message, res.type);
         }
