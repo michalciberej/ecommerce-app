@@ -34,7 +34,7 @@ const ProductForm = () => {
     <form
       action={handlePost}
       ref={formRef}
-      className='flex gap-8 bg-neutral-100 p-4 ring-1 ring-inset ring-neutral-500 items-center rounded-md shadow-md'>
+      className='flex gap-8 bg-neutral-50 p-4 ring-1 ring-inset ring-neutral-500 items-center rounded-md shadow-md'>
       <Input
         id='title'
         name='title'
