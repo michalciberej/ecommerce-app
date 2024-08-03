@@ -8,6 +8,7 @@ import {
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
 } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 
 const Pagination = ({ pagesCount }: { pagesCount: number }) => {
   const pathname = usePathname();
@@ -35,38 +36,33 @@ const Pagination = ({ pagesCount }: { pagesCount: number }) => {
     <nav className='flex w-full justify-end'>
       <ul className='flex w-full max-w-fit items-end gap-x-2 pt-2'>
         <li>
-          <button
-            type='button'
+          <Link
             aria-label='Change to first page'
-            onClick={() => replace(createPageURL(1, searchParams, pathname))}
+            href={createPageURL(1, searchParams, pathname)}
             className='rounded-md p-2 ring-1 ring-inset ring-neutral-500 bg-neutral-50 flex '>
             <ChevronDoubleLeftIcon className='w-4 h-4' />
-          </button>
+          </Link>
         </li>
         {buttons.map(({ el, id }) => (
           <li key={id}>
-            <button
-              type='button'
+            <Link
               aria-label={`Change to ${el} page`}
-              onClick={() => replace(createPageURL(el, searchParams, pathname))}
+              href={createPageURL(el, searchParams, pathname)}
               className={twMerge(
                 'rounded-md px-3 py-1 ring-1 ring-inset ring-neutral-500 bg-neutral-50 flex',
                 currentPage === el && 'ring-2 ring-orange-500'
               )}>
               {el}
-            </button>
+            </Link>
           </li>
         ))}
         <li>
-          <button
-            type='button'
+          <Link
             aria-label='Change to last page'
-            onClick={() =>
-              replace(createPageURL(pagesCount, searchParams, pathname))
-            }
+            href={createPageURL(pagesCount, searchParams, pathname)}
             className='rounded-md p-2 ring-1 ring-inset ring-neutral-500 bg-neutral-50 flex'>
             <ChevronDoubleRightIcon className='w-4 h-4' />
-          </button>
+          </Link>
         </li>
       </ul>
     </nav>
