@@ -14,7 +14,6 @@ export interface ToastContextType {
   toasts: ToastType[];
   addToast: (message: string, type: ToastTypeUnion) => void;
   removeToast: (id: string) => void;
-  autoRemoveToast: (id: string, time?: number) => void;
 }
 
 export const ToastContext = createContext<ToastContextType | null>(null);
@@ -28,22 +27,15 @@ export const ToastContextProvider = ({
 
   const addToast = (message: string, type: ToastTypeUnion) => {
     const toast = createToast(message, type);
-    setToasts(toasts.concat(toast));
+    setToasts([...toasts, toast]);
   };
 
   const removeToast = (id: string) => {
-    setToasts(toasts.filter((el) => el.id !== id));
-  };
-
-  const autoRemoveToast = (id: string, time: number = 5000) => {
-    setTimeout(() => {
-      removeToast(id);
-    }, time);
+    setToasts(toasts.filter((toast) => toast.id !== id));
   };
 
   return (
-    <ToastContext.Provider
-      value={{ toasts, addToast, removeToast, autoRemoveToast }}>
+    <ToastContext.Provider value={{ toasts, addToast, removeToast }}>
       {children}
     </ToastContext.Provider>
   );

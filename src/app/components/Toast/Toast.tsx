@@ -4,9 +4,10 @@ import { useToastContext } from '@/app/context/ToastContext';
 import { SuccessIcon, WarningIcon, ErrorIcon } from '@/app/components/Toast';
 import { ToastProps } from '@/app/components/Toast';
 import { XMarkIcon } from '@heroicons/react/24/outline';
+import { useEffect } from 'react';
 
 const Toast = ({ message, type, id }: ToastProps) => {
-  const { autoRemoveToast, removeToast } = useToastContext();
+  const { removeToast } = useToastContext();
 
   const iconMap = {
     success: <SuccessIcon />,
@@ -16,7 +17,13 @@ const Toast = ({ message, type, id }: ToastProps) => {
 
   const toastIcon = iconMap[type] || null;
 
-  autoRemoveToast(id);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      removeToast(id);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [removeToast, id]);
 
   return (
     <div
@@ -26,7 +33,10 @@ const Toast = ({ message, type, id }: ToastProps) => {
         {toastIcon}
         <p className='text-neutral-700 text-wrap'>{message}</p>
       </div>
-      <button onClick={() => removeToast(id)}>
+      <button
+        aria-label='Close toast'
+        type='button'
+        onClick={() => removeToast(id)}>
         <XMarkIcon className='w-6 h-6' />
       </button>
     </div>
