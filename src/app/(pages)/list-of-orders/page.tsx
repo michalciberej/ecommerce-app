@@ -24,7 +24,7 @@ const ListOfOrdersPage = async ({
       <section className='flex flex-col gap-4'>
         <h1 className='text-3xl'>List of Orders</h1>
         {valid ? (
-          <table className='w-full bg-neutral-100 rounded-md shadow-md p-4 ring-1 overflow-hidden ring-neutral-500'>
+          <table className='w-full bg-neutral-50 rounded-md shadow-md p-4 ring-1 overflow-hidden ring-neutral-500'>
             <thead>
               <tr className='w-full border-b border-neutral-500 p-2 flex items-center justify-between sm:gap-8'>
                 <th className='text-start sm:max-w-56 sm:min-w-[20ch] w-full gap-1 sm:gap-8'>
@@ -50,7 +50,7 @@ const ListOfOrdersPage = async ({
                     <td className='sm:max-w-56 w-full sm:min-w-[20ch] truncate'>
                       {order.id}
                     </td>
-                    <td className='w-full'>{index + 1}</td>
+                    <td className='w-full'>{order.orderNumber}</td>
                     <td className='w-full capitalize'>{order.product.title}</td>
                     <td className='w-full'>{order.quantity} x</td>
                     <td className='w-full '>
