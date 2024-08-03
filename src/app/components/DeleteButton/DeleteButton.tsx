@@ -102,7 +102,7 @@ const DeleteButton = ({ id, action }: DeleteButtonProps) => {
           <div
             ref={modalRef}
             data-testid='conf-modal'
-            className='flex flex-col gap-4 w-4/5 lg:w-1/3 bg-neutral-200 p-4 relative z-20 rounded-md shadow-md ring-1 ring-inset ring-neutral-500'>
+            className='flex flex-col gap-4 w-4/5 md:w-1/2 lg:w-1/3 bg-neutral-200 p-4 relative z-20 rounded-md shadow-md ring-1 ring-inset ring-neutral-500'>
             <h3 className='text-2xl'>Are you sure?</h3>
             <p className='flex-1'>
               By deleting this record you may accidentaly delete other related
