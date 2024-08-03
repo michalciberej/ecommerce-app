@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { createPageURL } from '@/app/utils/createPageURL';
 import { twMerge } from 'tailwind-merge';
 import { v4 as uuid } from 'uuid';
@@ -14,7 +14,6 @@ const Pagination = ({ pagesCount }: { pagesCount: number }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
-  const { replace } = useRouter();
 
   const buttons = Array(pagesCount)
     .fill(1)
