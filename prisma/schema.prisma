@@ -17,6 +17,7 @@ model Product {
 model Order {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   quantity Int
+  orderNumber Int
   productId String @db.ObjectId
   product Product @relation(fields: [productId], references: [id])
 }
