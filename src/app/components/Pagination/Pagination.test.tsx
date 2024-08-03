@@ -23,7 +23,7 @@ describe(Pagination, () => {
     const pageCount = 10;
 
     const { getAllByRole } = render(<Pagination pagesCount={pageCount} />);
-    const buttonEls = getAllByRole('button');
+    const buttonEls = getAllByRole('link');
 
     expect(buttonEls).toHaveLength(4);
   });
@@ -35,7 +35,7 @@ describe(Pagination, () => {
     const pageCount = 10;
 
     const { getAllByRole } = render(<Pagination pagesCount={pageCount} />);
-    const buttonEls = getAllByRole('button');
+    const buttonEls = getAllByRole('link');
 
     expect(buttonEls).toHaveLength(5);
   });
