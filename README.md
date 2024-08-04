@@ -33,11 +33,10 @@ $ npm install
 DATABASE_URL = '<put MongoDB url string here>';
 ```
 
-6. Generate prisma client and push schema models to sync the database.
+6. Generate prisma client.
 
 ```bash
 $ npx prisma generate
-$ npx prisma db push
 ```
 
 7. Run the development server.
